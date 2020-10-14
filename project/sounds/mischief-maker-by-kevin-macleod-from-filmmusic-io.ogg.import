@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mischief-maker-by-kevin-macleod-from-filmmusic-io.ogg-91c7c9daf041a17593f2367ad37619c9.oggstr"
+
+[deps]
+
+source_file="res://sounds/mischief-maker-by-kevin-macleod-from-filmmusic-io.ogg"
+dest_files=[ "res://.import/mischief-maker-by-kevin-macleod-from-filmmusic-io.ogg-91c7c9daf041a17593f2367ad37619c9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

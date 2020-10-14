@@ -1,4 +1,7 @@
 
+export/
+exclude/
+
 # Godot-specific ignores
 .import/
 export.cfg

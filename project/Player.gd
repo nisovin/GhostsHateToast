@@ -22,7 +22,9 @@ var powerups = {
 	"triple": 0,
 	"rapid_fire": 0,
 	"two_slot": 0,
-	"four_slot": 0
+	"four_slot": 0,
+	"splitter": 0,
+	"dense": 0
 }
 
 onready var toaster = $Toaster
@@ -100,7 +102,13 @@ func fire():
 	sprite.play("fire")
 	
 func fire_projectile(t, angle_offset = 0):
-	var projectile = G.Toast.instance()
+	var projectile
+	if powerups.dense > 0:
+		projectile = G.Bagel.instance()
+	else:
+		projectile = G.Toast.instance()
+	if powerups.splitter > 0:
+		projectile.set_splitter()
 	emit_signal("fired", projectile)
 	projectile.global_position = t.global_position
 	projectile.rotation = t.rotation + angle_offset
@@ -108,7 +116,7 @@ func fire_projectile(t, angle_offset = 0):
 	return projectile
 
 func collect(powerup):
-	powerups[powerup.id] = min(powerups[powerup.id] + powerup.duration, powerup.duration * 2)
+	powerups[powerup.id] = min(powerups[powerup.id] + powerup.duration, powerup.duration * 1.5)
 	if has_method("powerup_" + powerup.id):
 		call("powerup_" + powerup.id)
 	call_deferred("collect_message", powerup)

@@ -4,11 +4,13 @@ onready var player = $Player
 
 onready var score_label = $CanvasLayer/Label
 
-var interval = 5.0
+var interval = 4.0
 var ghost_count = 0
+var ghost_health_multiplier = 1.0
 var score = 0
 var escaping = false
 var escaped = 0
+var cheats_used = false
 var gameover = false
 
 var cheatcode = ""
@@ -26,7 +28,7 @@ func _unhandled_input(event):
 
 func _unhandled_key_input(event):
 	if event.pressed and event.scancode == KEY_F1:
-		fire_side_launchers()
+		cheat_yeast()
 	if event.pressed and event.scancode == KEY_F2:
 		interval = 1
 	if event.pressed and event.scancode == KEY_F3:
@@ -42,6 +44,10 @@ func _unhandled_key_input(event):
 		player.collect(G.powerup_database[2])
 	if event.pressed and event.scancode == KEY_F9:
 		player.collect(G.powerup_database[3])
+	if event.pressed and event.scancode == KEY_F10:
+		player.collect(G.powerup_database[4])
+	if event.pressed and event.scancode == KEY_F11:
+		player.collect(G.powerup_database[5])
 	if event.pressed and event.scancode >= KEY_A and event.scancode <= KEY_Z and not gameover:
 		var key = OS.get_scancode_string(event.scancode)
 		cheatcode += key
@@ -52,32 +58,35 @@ func _unhandled_key_input(event):
 func _on_player_fired(projectile):
 	$ToastHolder.add_child(projectile)
 
-
-func _on_Timer_timeout():
+func _on_SpawnTimer_timeout():
 	ghost_count += 1
 	var ghost = G.Ghost.instance()
-	ghost.init(ghost_count)
+	ghost.init(ghost_count, ghost_health_multiplier)
 	var i = randi() % $GhostPaths.get_child_count()
 	$GhostPaths.get_child(i).add_child(ghost)
 	ghost.offset = 0
 	ghost.connect("died", self, "_on_ghost_die")
 	$SpawnTimer.start(rand_range(interval * 0.7, interval * 1.2))
 
+func _on_DifficultyTimer_timeout():
+	ghost_health_multiplier + 0.25
+	print(ghost_health_multiplier)
+
 func _on_ghost_die(ghost, bread):
 	if gameover: return
 	var mult = ghost.data.mult * bread.mult if bread != null else 0
 	var dist = ghost.unit_offset
-	
+
 	var points = (2 - dist) * mult * (20.0 / interval)
-	
+
 	score += points
 	score_label.text = "Score: " + str(round(score))
-	
-	if bread != null and not bread.free_kill:
+
+	if bread != null and not bread.free_kill and interval > 1:
 		interval -= 0.2 * mult
 		if interval < 1:
 			interval = 1
-		
+
 	if ghost.data.has("drop"):
 		var drops = int(floor(ghost.data.drop))
 		var chance = ghost.data.drop - drops
@@ -88,6 +97,7 @@ func _on_ghost_die(ghost, bread):
 
 func spawn_powerup(position):
 	var powerup = G.Powerup.instance()
+	powerup.init(player.powerups)
 	powerup.position = position
 	$ToastHolder.call_deferred("add_child", powerup)
 
@@ -101,14 +111,14 @@ func escaped_ghost():
 	escaping = true
 	interval = clamp(interval * 2, 2.5, max(4, interval))
 	$EscapeAudio.play()
-	
+
 	if escaped < 5:
 		escaped += 1
-	
+
 		var life_tex = get_node("CanvasLayer/Lives/Life" + str(escaped))
 		life_tex.texture = preload("res://art/life_2.png")
 		life_tex.modulate.a = 0.8
-		
+
 		yield(get_tree().create_timer(2.5), "timeout")
 		fire_side_launchers()
 		yield(get_tree().create_timer(2.5), "timeout")
@@ -116,7 +126,7 @@ func escaped_ghost():
 
 	else:
 		end_game()
-	
+
 func fire_side_launchers():
 	for i in 8:
 		var crumb = G.Crumb.instance()
@@ -143,7 +153,7 @@ func end_game():
 		else:
 			$CanvasLayer/GameOver/Cheatcode.text = G.cheatcode_database[randi() % G.cheatcode_database.size()]
 	$CanvasLayer/GameOver.show()
-	if s > G.save_data.high_score:
+	if s > G.save_data.high_score and not cheats_used:
 		G.save_data.high_score = s
 	G.save_game()
 
@@ -151,19 +161,42 @@ func check_cheat_code():
 	for c in G.cheatcode_database:
 		if cheatcode.ends_with(c):
 			cheatcode = ""
+			cheats_used = true
 			call("cheat_" + c.to_lower())
 
 func cheat_yeast():
-	spawn_powerup(Vector2(player.position.x, 0))
+	spawn_powerup(Vector2(player.position.x, 75))
+
+func cheat_sandwich():
+	activate_powerup_by_name("two_slot")
 	
+func cheat_creamcheese():
+	activate_powerup_by_name("dense")
+
 func cheat_gluten():
 	fire_side_launchers()
-	
+
+func cheat_fullloaf():
+	activate_powerup_by_name("four_slot")
+	activate_powerup_by_name("rapid_fire")
+
 func cheat_crossover():
 	for path in $GhostPaths.get_children():
 		for ghost in path.get_children():
 			ghost.kill()
-	
+
+func cheat_graveyard():
+	interval = 0.5
+
+func cheat_godofbread():
+	for p in G.powerup_database:
+		player.collect(p)
+
+func activate_powerup_by_name(name):
+	for p in G.powerup_database:
+		if p.id == name:
+			player.collect(p)
+
 func _on_Menu_pressed():
 	get_tree().paused = false
 	get_tree().change_scene("res://MainMenu.tscn")

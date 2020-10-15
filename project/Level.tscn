@@ -91,9 +91,9 @@ curve = SubResource( 4 )
 wait_time = 5.0
 one_shot = true
 
-[node name="TickTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
 
 [node name="DeathZone" type="Area2D" parent="." groups=[
 "deathzone",
@@ -269,8 +269,8 @@ position = Vector2( 627.732, 351.742 )
 
 [node name="EscapeAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="TickTimer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
 [connection signal="area_entered" from="DeathZone" to="." method="_on_DeathZone_area_entered"]
 [connection signal="pressed" from="CanvasLayer/Pause/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/Pause/VBoxContainer/Menu" to="." method="_on_Menu_pressed"]

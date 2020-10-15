@@ -20,7 +20,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16.8577, 6.27203 )
+extents = Vector2( 8.97581, 17.7319 )
 
 [sub_resource type="Gradient" id=5]
 colors = PoolColorArray( 0.964706, 0.729412, 0.490196, 1, 0.560784, 0.337255, 0.231373, 0 )
@@ -35,7 +35,7 @@ rotation = 1.5708
 frames = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.205925, -7.79537 )
+position = Vector2( 4.2002, 0.19314 )
 shape = SubResource( 4 )
 
 [node name="DieParticles" type="CPUParticles2D" parent="."]

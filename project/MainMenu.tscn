@@ -5,52 +5,52 @@
 [ext_resource path="res://art/ghost2.png" type="Texture" id=3]
 [ext_resource path="res://MainMenu.gd" type="Script" id=4]
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 60, 100 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 60, 0, 60, 100 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
 region = Rect2( 120, 0, 60, 100 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
 region = Rect2( 180, 0, 60, 100 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
 region = Rect2( 240, 0, 60, 100 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 300, 0, 60, 100 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=8]
 size = 48
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = 3
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=9]
 size = 32
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=10]
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
@@ -68,13 +68,13 @@ texture = ExtResource( 2 )
 [node name="Ghost" type="AnimatedSprite" parent="Node2D"]
 modulate = Color( 1, 1, 1, 0.341176 )
 position = Vector2( 491.077, 111.685 )
-frames = SubResource( 8 )
+frames = SubResource( 7 )
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
 margin_top = 21.0
 margin_bottom = 83.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0.941176, 0.784314, 0.305882, 1 )
 text = "Ghosts Hate Toast"
 align = 1
@@ -91,15 +91,15 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 margin_left = 234.0
-margin_top = 119.0
+margin_top = 98.0
 margin_right = 406.0
-margin_bottom = 241.0
+margin_bottom = 262.0
 
 [node name="Play" type="Button" parent="Menu/VBoxContainer"]
 margin_right = 172.0
 margin_bottom = 38.0
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 9 )
 text = "Play"
 flat = true
 
@@ -108,16 +108,25 @@ margin_top = 42.0
 margin_right = 172.0
 margin_bottom = 80.0
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 9 )
 text = "Fullscreen"
 flat = true
 
-[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+[node name="Credits" type="Button" parent="Menu/VBoxContainer"]
 margin_top = 84.0
 margin_right = 172.0
 margin_bottom = 122.0
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 9 )
+text = "Credits"
+flat = true
+
+[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+margin_top = 126.0
+margin_right = 172.0
+margin_bottom = 164.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 9 )
 text = "Quit"
 flat = true
 
@@ -126,12 +135,159 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -54.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.831373, 0.819608, 0.541176, 1 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Credits" type="MarginContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Credits"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 600.0
+margin_bottom = 320.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits/Panel/VBoxContainer"]
+margin_right = 560.0
+margin_bottom = 256.0
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "[center]
+
+=====================
+GODOT WILD JAM #26
+=====================
+
+Themes:
+
+[img=150]res://img/bread.png[/img] [img=150]res://img/spooky.png[/img] [img=150]res://img/prehistoric.png[/img]
+
+
+=====================
+DEVELOPMENT
+=====================
+
+Programming: Nisovin
+Art: Aeldae
+Sounds: TonyArakawa, Nisovin
+
+
+=====================
+MUSIC
+=====================
+
+Mischief Maker by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4059-mischief-maker
+License: http://creativecommons.org/licenses/by/4.0/
+
+
+
+=====================
+ENGINE
+=====================
+
+    This game uses Godot Engine, available under the following license:
+
+    Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2020 Godot Engine contributors.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+	Portions of this software are copyright © 2020 The FreeType Project (www.freetype.org). All rights reserved.
+
+[/center]"
+text = "
+
+=====================
+GODOT WILD JAM #26
+=====================
+
+Themes:
+
+  
+
+
+=====================
+DEVELOPMENT
+=====================
+
+Programming: Nisovin
+Art: Aeldae
+Sounds: TonyArakawa, Nisovin
+
+
+=====================
+MUSIC
+=====================
+
+Mischief Maker by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4059-mischief-maker
+License: http://creativecommons.org/licenses/by/4.0/
+
+
+
+=====================
+ENGINE
+=====================
+
+    This game uses Godot Engine, available under the following license:
+
+    Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2020 Godot Engine contributors.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+	Portions of this software are copyright © 2020 The FreeType Project (www.freetype.org). All rights reserved.
+
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/Panel/VBoxContainer"]
+margin_top = 260.0
+margin_right = 560.0
+margin_bottom = 280.0
+alignment = 1
+
+[node name="CreditsClose" type="Button" parent="Credits/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 256.0
+margin_right = 303.0
+margin_bottom = 20.0
+text = "Close"
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/FullScreen" to="." method="_on_FullScreen_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Credits/Panel/VBoxContainer/HBoxContainer/CreditsClose" to="." method="_on_CreditsClose_pressed"]

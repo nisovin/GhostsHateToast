@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Powerup.gd" type="Script" id=1]
+[ext_resource path="res://sounds/powerup_spawn.wav" type="AudioStream" id=2]
+[ext_resource path="res://sounds/powerup_pickup.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.2467
@@ -16,4 +18,11 @@ shape = SubResource( 1 )
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color( 0, 1, 0.27451, 1 )
 polygon = PoolVector2Array( -10.1411, -7.97719, -0.191719, -3.21826, 5.9604, -7.68519, 2.95808, -1.0134, 8.96379, 6.45577, 1.85565, 2.92385, -3.38347, 8.75002, -2.55407, 1.19146 )
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 [connection signal="area_entered" from="." to="." method="_on_Powerup_area_entered"]

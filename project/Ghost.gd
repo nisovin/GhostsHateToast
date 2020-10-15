@@ -11,10 +11,10 @@ var gone = false
 onready var animator = $AnimationPlayer
 onready var audio = $AudioStreamPlayer
 
-func init(count):
+func init(count, health_mult):
 	data = random_ghost(count)
 	
-	health = data.hp
+	health = data.hp * health_mult
 	
 	node = $Entity.get_child(data.sprite)
 	for child in $Entity.get_children():

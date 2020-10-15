@@ -3,7 +3,7 @@ extends "res://Bread.gd"
 func _init():
 	speed = 400
 	mult = 0.1
-	damage = 1.5
+	damage = 15
 	free_kill = true
 	
 func _ready():

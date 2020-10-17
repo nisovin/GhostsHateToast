@@ -27,27 +27,6 @@ func _unhandled_input(event):
 		get_tree().paused = true
 
 func _unhandled_key_input(event):
-	if event.pressed and event.scancode == KEY_F1:
-		cheat_yeast()
-	if event.pressed and event.scancode == KEY_F2:
-		interval = 1
-	if event.pressed and event.scancode == KEY_F3:
-		score = 1500
-		end_game()
-	if event.pressed and event.scancode == KEY_F4:
-		spawn_powerup(Vector2(player.position.x, 100))
-	if event.pressed and event.scancode == KEY_F5:
-		player.collect(G.powerup_database[0])
-	if event.pressed and event.scancode == KEY_F6:
-		player.collect(G.powerup_database[1])
-	if event.pressed and event.scancode == KEY_F7:
-		player.collect(G.powerup_database[2])
-	if event.pressed and event.scancode == KEY_F9:
-		player.collect(G.powerup_database[3])
-	if event.pressed and event.scancode == KEY_F10:
-		player.collect(G.powerup_database[4])
-	if event.pressed and event.scancode == KEY_F11:
-		player.collect(G.powerup_database[5])
 	if event.pressed and event.scancode >= KEY_A and event.scancode <= KEY_Z and not gameover:
 		var key = OS.get_scancode_string(event.scancode)
 		cheatcode += key
@@ -70,7 +49,6 @@ func _on_SpawnTimer_timeout():
 
 func _on_DifficultyTimer_timeout():
 	ghost_health_multiplier + 0.25
-	print(ghost_health_multiplier)
 
 func _on_ghost_die(ghost, bread):
 	if gameover: return

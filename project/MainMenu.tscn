@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://novem___.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://art/background.png" type="Texture" id=2]
+[ext_resource path="res://art/backdrop.png" type="Texture" id=2]
 [ext_resource path="res://art/ghost2.png" type="Texture" id=3]
 [ext_resource path="res://MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://sounds/Ghoulish-Fun_Looping.ogg" type="AudioStream" id=5]
+[ext_resource path="res://sounds/ooooo.wav" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -61,14 +63,21 @@ script = ExtResource( 4 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Background" type="Sprite" parent="Node2D"]
-position = Vector2( 320.21, 178.651 )
-scale = Vector2( 1.01191, 0.861944 )
+position = Vector2( 320, 180 )
 texture = ExtResource( 2 )
 
 [node name="Ghost" type="AnimatedSprite" parent="Node2D"]
 modulate = Color( 1, 1, 1, 0.341176 )
 position = Vector2( 491.077, 111.685 )
 frames = SubResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.670588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
@@ -192,7 +201,7 @@ DEVELOPMENT
 
 Programming: Nisovin
 Art: Aeldae
-Sounds: TonyArakawa, Nisovin
+Sound Effects: TonyArakawa and Nisovin
 
 
 =====================
@@ -203,6 +212,8 @@ Mischief Maker by Kevin MacLeod
 Link: https://incompetech.filmmusic.io/song/4059-mischief-maker
 License: http://creativecommons.org/licenses/by/4.0/
 
+Goulish Fun (Looping) by Eric Matyas
+www.soundimage.org
 
 
 =====================
@@ -240,7 +251,7 @@ DEVELOPMENT
 
 Programming: Nisovin
 Art: Aeldae
-Sounds: TonyArakawa, Nisovin
+Sound Effects: TonyArakawa and Nisovin
 
 
 =====================
@@ -251,6 +262,8 @@ Mischief Maker by Kevin MacLeod
 Link: https://incompetech.filmmusic.io/song/4059-mischief-maker
 License: http://creativecommons.org/licenses/by/4.0/
 
+Goulish Fun (Looping) by Eric Matyas
+www.soundimage.org
 
 
 =====================
@@ -286,8 +299,21 @@ margin_left = 256.0
 margin_right = 303.0
 margin_bottom = 20.0
 text = "Close"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -25.0
+autoplay = true
+
+[node name="GhostSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -15.0
+
+[node name="SoundTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/FullScreen" to="." method="_on_FullScreen_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="Credits/Panel/VBoxContainer/HBoxContainer/CreditsClose" to="." method="_on_CreditsClose_pressed"]
+[connection signal="timeout" from="SoundTimer" to="." method="_on_SoundTimer_timeout"]

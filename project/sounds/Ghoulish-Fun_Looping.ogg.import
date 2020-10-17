@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Ghoulish-Fun_Looping.ogg-1e7bbf5bd39cc18bfc173f73f633182a.oggstr"
+
+[deps]
+
+source_file="res://sounds/Ghoulish-Fun_Looping.ogg"
+dest_files=[ "res://.import/Ghoulish-Fun_Looping.ogg-1e7bbf5bd39cc18bfc173f73f633182a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

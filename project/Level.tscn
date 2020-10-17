@@ -91,7 +91,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="DifficultyTimer" type="Timer" parent="."]
-wait_time = 45.0
+wait_time = 60.0
 autostart = true
 
 [node name="DeathZone" type="Area2D" parent="." groups=[

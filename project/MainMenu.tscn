@@ -67,7 +67,7 @@ position = Vector2( 320, 180 )
 texture = ExtResource( 2 )
 
 [node name="Ghost" type="AnimatedSprite" parent="Node2D"]
-modulate = Color( 1, 1, 1, 0.341176 )
+modulate = Color( 1, 1, 1, 0.596078 )
 position = Vector2( 491.077, 111.685 )
 frames = SubResource( 7 )
 
@@ -84,7 +84,7 @@ anchor_right = 1.0
 margin_top = 21.0
 margin_bottom = 83.0
 custom_fonts/font = SubResource( 8 )
-custom_colors/font_color = Color( 0.941176, 0.784314, 0.305882, 1 )
+custom_colors/font_color = Color( 0.945098, 0.560784, 0.137255, 1 )
 text = "Ghosts Hate Toast"
 align = 1
 __meta__ = {

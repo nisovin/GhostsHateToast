@@ -42,12 +42,12 @@ const sounds = {
 }
 
 const powerup_database = [
-	{ "id": "two_slot", "weight": 12, "name": "Double Slot Toaster", "duration": 15 },
+	{ "id": "two_slot", "weight": 10, "name": "Double Slot Toaster", "duration": 15 },
 	{ "id": "triple", "weight": 3, "name": "Extra Toasters", "duration": 10 },
-	{ "id": "rapid_fire", "weight": 8, "name": "Quick Toast", "duration": 10 },
+	{ "id": "rapid_fire", "weight": 8, "name": "Quick Toast", "duration": 15 },
 	{ "id": "four_slot", "weight": 2, "name": "Quad Slot Toaster", "duration": 10 },
-	{ "id": "splitter", "weight": 5, "name": "Splitter Toast", "duration": 12 },
-	{ "id": "dense", "weight": 10, "name": "Bagels", "duration": 8 }
+	{ "id": "splitter", "weight": 5, "name": "Splitter Toast", "duration": 10 },
+	{ "id": "dense", "weight": 6, "name": "Bagels", "duration": 12 }
 ]
 
 const cheatcode_database = [
@@ -97,7 +97,7 @@ const ghost_database = [
 	},
 	{ # small drop ghost
 		"sprite": 0,
-		"tint": Color.limegreen,
+		"tint": Color.blueviolet,
 		"weight": 10,
 		"after": 15,
 		"cd": 10,
@@ -129,7 +129,7 @@ const ghost_database = [
 		"mult": 2.0,
 		"hp": 30,
 		"speed": 100,
-		"drop": 0.05,
+		"drop": 0.02,
 		"hurt_sounds": ["hurt4"],
 		"death_sounds": ["die1"]
 	},
@@ -137,11 +137,11 @@ const ghost_database = [
 		"sprite": 2,
 		"weight": 10,
 		"after": 20,
-		"cd": 15,
+		"cd": 20,
 		"mult": 3,
 		"hp": 60,
 		"speed": 75,
-		"drop": 1,
+		"drop": 1.05,
 		"hurt_sounds": ["hurt5"],
 		"death_sounds": ["die3"]
 	},
@@ -152,9 +152,9 @@ const ghost_database = [
 		"after": 30,
 		"cd": 30,
 		"mult": 6,
-		"hp": 150,
+		"hp": 120,
 		"speed": 50,
-		"drop": 1.5,
+		"drop": 1.4,
 		"hurt_sounds": ["hurt5"],
 		"death_sounds": ["die3"]
 	},
@@ -164,8 +164,8 @@ const ghost_database = [
 		"weight": 3,
 		"after": 150,
 		"cd": 75,
-		"mult": 6,
-		"hp": 300,
+		"mult": 20,
+		"hp": 200,
 		"speed": 30,
 		"drop": 2,
 		"hurt_sounds": ["hurt5"],

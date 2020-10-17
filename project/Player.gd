@@ -5,8 +5,8 @@ signal fired
 const EDGE = 100
 const SPEED = 250
 const ROTATION_SPEED = 0.2
-const MIN_ROT = -PI * .80
-const MAX_ROT = -PI * .20
+const MIN_ROT = -PI * .90
+const MAX_ROT = -PI * .10
 const COOLDOWN_DURATION = 0.75
 
 var aim_mode = "M"

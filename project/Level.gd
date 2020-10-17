@@ -60,13 +60,13 @@ func _on_ghost_die(ghost, bread):
 	score += points
 	score_label.text = "Score: " + str(round(score))
 
-	if bread != null and not bread.free_kill and interval > 0.75:
+	if bread != null and not bread.free_kill and interval > 0.8:
 		if interval > 1.5:
-			interval -= 0.2 * mult
+			interval -= 0.2
 		else:
-			interval -= 0.1 * mult
-		if interval < 0.75:
-			interval = 0.75
+			interval -= 0.1
+		if interval < 0.8:
+			interval = 0.8
 
 	if ghost.data.has("drop"):
 		var drops = int(floor(ghost.data.drop))
@@ -81,7 +81,7 @@ func _on_ghost_die(ghost, bread):
 
 func spawn_powerup(position):
 	var powerup = G.Powerup.instance()
-	powerup.init(player.powerups)
+	powerup.init(player.powerups, get_tree().get_nodes_in_group("powerup"))
 	powerup.position = position
 	$ToastHolder.call_deferred("add_child", powerup)
 

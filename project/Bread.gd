@@ -22,14 +22,7 @@ func launch(toaster_vel = Vector2.ZERO):
 
 func set_splitter():
 	splitter = true
-	modulate = Color.mediumpurple
-
-func set_dense():
-	damage *= 2
-	if splitter:
-		modulate = Color.purple
-	else:
-		modulate = Color.indianred
+	modulate = Color.cyan
 
 func _process(delta):
 	position += velocity * delta

@@ -8,35 +8,35 @@
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 60, 60 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 60, 60 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 60, 0, 60, 60 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 120, 0, 60, 60 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ SubResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": false,
 "name": "fire",
 "speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 62.8854, 38.6968 )
+extents = Vector2( 81.2362, 38.6968 )
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "triple_hide"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Toaster2:visible")
@@ -111,8 +111,7 @@ tracks/5/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.2, 0.2 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "triple_show"
+[sub_resource type="Animation" id=8]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Toaster2:visible")
@@ -195,7 +194,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Toaster"]
 position = Vector2( -0.0395203, 0.41169 )
 rotation = 1.5708
-frames = SubResource( 2 )
+frames = SubResource( 5 )
 offset = Vector2( 1.91904, -4.71146 )
 
 [node name="Toaster2" type="Node2D" parent="."]
@@ -206,7 +205,7 @@ scale = Vector2( 0.2, 0.2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Toaster2"]
 position = Vector2( -0.0395203, 0.41169 )
 rotation = 1.5708
-frames = SubResource( 2 )
+frames = SubResource( 5 )
 offset = Vector2( 1.91904, -4.71146 )
 
 [node name="Toaster3" type="Node2D" parent="."]
@@ -217,7 +216,7 @@ scale = Vector2( 0.2, 0.2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Toaster3"]
 position = Vector2( -0.0395203, 0.41169 )
 rotation = 1.5708
-frames = SubResource( 2 )
+frames = SubResource( 5 )
 offset = Vector2( 1.91904, -4.71146 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -233,5 +232,5 @@ shape = SubResource( 6 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="TripleAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/triple_hide = SubResource( 8 )
-anims/triple_show = SubResource( 7 )
+anims/triple_hide = SubResource( 7 )
+anims/triple_show = SubResource( 8 )

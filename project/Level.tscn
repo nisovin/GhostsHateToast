@@ -91,7 +91,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="DifficultyTimer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 45.0
 autostart = true
 
 [node name="DeathZone" type="Area2D" parent="." groups=[
@@ -102,7 +102,7 @@ collision_layer = 32
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2( -176.253, -234.781 )
+position = Vector2( -176.783, -229.484 )
 shape = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

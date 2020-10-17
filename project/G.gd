@@ -55,10 +55,12 @@ const cheatcode_database = [
 	"SANDWICH", # two_slot
 	"CREAMCHEESE", # bagels
 	"GLUTEN", # side launchers
+	"DEATHDOUSPART", # splitter
 	"FULLLOAF", # four_slot + rapid_fire
 	"CROSSOVER", # kill all ghosts
 	"GRAVEYARD", # spawn lots of ghosts
 	"GODOFBREAD", # all powerups
+	"PANDEMUERTO", # all powerups, lots of ghosts
 ]
 
 const ghost_database = [
@@ -115,7 +117,6 @@ const ghost_database = [
 		"mult": 2.0,
 		"hp": 15,
 		"speed": 140,
-		"drop": 0.05,
 		"hurt_sounds": ["hurt4"],
 		"death_sounds": ["die1"]
 	},
@@ -135,7 +136,7 @@ const ghost_database = [
 	{ # boss ghost
 		"sprite": 2,
 		"weight": 10,
-		"after": 15,
+		"after": 20,
 		"cd": 15,
 		"mult": 3,
 		"hp": 60,
@@ -154,6 +155,19 @@ const ghost_database = [
 		"hp": 150,
 		"speed": 50,
 		"drop": 1.5,
+		"hurt_sounds": ["hurt5"],
+		"death_sounds": ["die3"]
+	},
+	{ # super beefy boss ghost
+		"sprite": 2,
+		"tint": Color.darkred,
+		"weight": 3,
+		"after": 150,
+		"cd": 75,
+		"mult": 6,
+		"hp": 300,
+		"speed": 30,
+		"drop": 2,
 		"hurt_sounds": ["hurt5"],
 		"death_sounds": ["die3"]
 	}

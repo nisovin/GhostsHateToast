@@ -25,4 +25,6 @@ autoplay = true
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="." to="." method="_on_Powerup_area_entered"]

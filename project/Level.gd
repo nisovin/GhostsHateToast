@@ -48,7 +48,7 @@ func _on_SpawnTimer_timeout():
 	$SpawnTimer.start(rand_range(interval * 0.7, interval * 1.2))
 
 func _on_DifficultyTimer_timeout():
-	ghost_health_multiplier + 0.25
+	ghost_health_multiplier += 0.1
 
 func _on_ghost_die(ghost, bread):
 	if gameover: return
@@ -60,18 +60,24 @@ func _on_ghost_die(ghost, bread):
 	score += points
 	score_label.text = "Score: " + str(round(score))
 
-	if bread != null and not bread.free_kill and interval > 1:
-		interval -= 0.2 * mult
-		if interval < 1:
-			interval = 1
+	if bread != null and not bread.free_kill and interval > 0.75:
+		if interval > 1.5:
+			interval -= 0.2 * mult
+		else:
+			interval -= 0.1 * mult
+		if interval < 0.75:
+			interval = 0.75
 
 	if ghost.data.has("drop"):
 		var drops = int(floor(ghost.data.drop))
 		var chance = ghost.data.drop - drops
 		if randf() < chance:
 			drops += 1
-		if drops > 0:
+		if drops == 1:
 			spawn_powerup(ghost.position)
+		elif drops == 2:
+			spawn_powerup(ghost.position - Vector2(10, 0))
+			spawn_powerup(ghost.position + Vector2(10, 0))
 
 func spawn_powerup(position):
 	var powerup = G.Powerup.instance()
@@ -87,7 +93,7 @@ func _on_DeathZone_area_entered(area):
 
 func escaped_ghost():
 	escaping = true
-	interval = clamp(interval * 2, 2.5, max(4, interval))
+	interval = clamp(interval * 2, 2.5, 4)
 	$EscapeAudio.play()
 
 	if escaped < 5:
@@ -158,6 +164,9 @@ func cheat_fullloaf():
 	activate_powerup_by_name("four_slot")
 	activate_powerup_by_name("rapid_fire")
 
+func cheat_deathdouspart():
+	activate_powerup_by_name("splitter")
+
 func cheat_crossover():
 	for path in $GhostPaths.get_children():
 		for ghost in path.get_children():
@@ -169,6 +178,10 @@ func cheat_graveyard():
 func cheat_godofbread():
 	for p in G.powerup_database:
 		player.collect(p)
+
+func cheat_pandemuerto():
+	cheat_godofbread()
+	interval = 0.4
 
 func activate_powerup_by_name(name):
 	for p in G.powerup_database:

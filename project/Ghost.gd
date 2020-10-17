@@ -5,6 +5,7 @@ signal died
 var data
 var node
 var health = 1
+var speed = 0
 var immune = 0
 var gone = false
 
@@ -15,6 +16,7 @@ func init(count, health_mult):
 	data = random_ghost(count)
 	
 	health = data.hp * health_mult
+	speed = data.speed * rand_range(0.9, 1.1)
 	
 	node = $Entity.get_child(data.sprite)
 	for child in $Entity.get_children():
@@ -53,7 +55,7 @@ func random_ghost(count):
 	return null
 
 func _process(delta):
-	offset += data.speed * delta
+	offset += speed * delta
 	if immune > 0:
 		immune -= delta
 
@@ -69,6 +71,7 @@ func hit(bread):
 
 func kill(bread = null):
 	if gone: return
+	gone = true
 	call_deferred("disable")
 	play_random_sound(data.death_sounds)
 	if randf() < 0.3:
@@ -80,18 +83,20 @@ func kill(bread = null):
 	queue_free()
 
 func escape():
+	if gone: return
+	gone = true
 	call_deferred("disable")
 	animator.play("escape")
 	yield(animator, "animation_finished")
 	queue_free()
 
 func disable():
-	if gone: return
-	gone = true
 	$Entity.collision_layer = 0
 	$Entity.collision_mask = 0
 	node.disabled = true
-	node.get_node("Trigger").queue_free()
+	var trigger = node.get_node_or_null("Trigger")
+	if trigger:
+		trigger.queue_free()
 
 func play_random_sound(array):
 	if array.size() > 0:

@@ -22,7 +22,7 @@ func launch(toaster_vel = Vector2.ZERO):
 
 func set_splitter():
 	splitter = true
-	modulate = Color.cyan
+	modulate = Color.mediumpurple
 
 func set_dense():
 	damage *= 2

@@ -40,14 +40,14 @@ func random_ghost(count):
 	var options = []
 	var total = 0
 	for g in G.ghost_database:
-		if not g.has("after") or g.after <= count:
+		if g.next <= count:
 			options.push_back(g)
 			total += g.weight
 	var r = randf() * total
 	for g in options:
 		if r < g.weight:
 			if g.has("cd") and g.cd > 0:
-				g.after = count + g.cd
+				g.next = count + g.cd
 			return g
 		else:
 			r -= g.weight

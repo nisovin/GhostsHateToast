@@ -13,6 +13,8 @@ var escaped = 0
 var cheats_used = false
 var gameover = false
 
+var first_drop = true
+
 var cheatcode = ""
 
 func _ready():
@@ -20,6 +22,19 @@ func _ready():
 	$SpawnTimer.start(interval)
 	if OS.has_feature("HTML5"):
 		$CanvasLayer/Pause/VBoxContainer/Quit.queue_free()
+	for g in G.ghost_database:
+		if g.has("after"):
+			g.next = g.after
+		else:
+			g.next = 0
+
+func show_help(text, duration = 5):
+	var label = $CanvasLayer/TutorialLabel
+	var tween = $CanvasLayer/TutorialLabel/Tween
+	label.text = text
+	tween.interpolate_property(label, "modulate", Color.transparent, Color.white, 0.5)
+	tween.interpolate_property(label, "modulate", Color.white, Color.transparent, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN, duration)
+	tween.start()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
@@ -46,6 +61,10 @@ func _on_SpawnTimer_timeout():
 	ghost.offset = 0
 	ghost.connect("died", self, "_on_ghost_die")
 	$SpawnTimer.start(rand_range(interval * 0.7, interval * 1.2))
+	if ghost_count == 1 and G.save_data.high_score == 0:
+		show_help("Left click to shoot toast")
+		yield(get_tree().create_timer(10), "timeout")
+		show_help("Use A and D to move")
 
 func _on_DifficultyTimer_timeout():
 	ghost_health_multiplier += 0.1
@@ -84,6 +103,9 @@ func spawn_powerup(position):
 	powerup.init(player.powerups, get_tree().get_nodes_in_group("powerup"))
 	powerup.position = position
 	$ToastHolder.call_deferred("add_child", powerup)
+	if first_drop and G.save_data.high_score == 0:
+		first_drop = false
+		show_help("Collect the falling ectoplasm for a powerup")
 
 func _on_DeathZone_area_entered(area):
 	if area.is_in_group("trigger"):

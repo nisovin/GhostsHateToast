@@ -47,7 +47,7 @@ const powerup_database = [
 	{ "id": "rapid_fire", "weight": 8, "name": "Quick Toast", "duration": 15 },
 	{ "id": "four_slot", "weight": 2, "name": "Quad Slot Toaster", "duration": 10 },
 	{ "id": "splitter", "weight": 5, "name": "Splitter Toast", "duration": 10 },
-	{ "id": "dense", "weight": 6, "name": "Bagels", "duration": 12 }
+	{ "id": "dense", "weight": 6, "name": "Bagels (Double Damage)", "duration": 12 }
 ]
 
 const cheatcode_database = [

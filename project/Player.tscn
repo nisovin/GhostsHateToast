@@ -34,7 +34,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 81.2362, 38.6968 )
+extents = Vector2( 80, 55 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "triple_hide"

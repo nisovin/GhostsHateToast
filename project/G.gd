@@ -1,5 +1,7 @@
 extends Node
 
+signal api_call_complete
+
 const Toast = preload("res://Toast.tscn")
 const Bagel = preload("res://Bagel.tscn")
 const Crumb = preload("res://Crumb.tscn")
@@ -9,13 +11,21 @@ const PowerupMessage = preload("res://PowerupMessage.tscn")
 
 const SAVE_FILE = "user://ghost_toast.dat"
 
+var api_key
+var http: HTTPRequest
+var api_result = {}
+
 var save_data = {
 	"high_score": 0,
 	"unlocked_cheatcodes": 0
 }
 
 func _ready():
+	api_key = APIKey.get_key()
 	load_game()
+	http = HTTPRequest.new()
+	add_child(http)
+	http.connect("request_completed", self, "_on_http_complete")
 
 func load_game():
 	var file = File.new()
@@ -29,6 +39,23 @@ func save_game():
 	file.open(SAVE_FILE, File.WRITE)
 	file.store_var(save_data)
 	file.close()
+
+func publish_high_score(player, score):
+	http.request("https://nisovin.com/gamejams/save_score.php?key=" + api_key + "&player=" + player + "&score=" + str(score), [], true, HTTPClient.METHOD_GET)
+	return self
+	
+func get_high_scores():
+	http.request("https://nisovin.com/gamejams/get_scores.php?key=" + api_key, [], true, HTTPClient.METHOD_GET)
+	return self
+
+func _on_http_complete(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
+	var s = body.get_string_from_utf8()
+	var r = JSON.parse(s)
+	if r.error == OK:
+		api_result = r.result
+	else:
+		api_result = {"error": "JSON error"}
+	emit_signal("api_call_complete")
 
 const sounds = {
 	"hurt1": preload("res://sounds/hurt1.wav"),
@@ -57,6 +84,7 @@ const cheatcode_database = [
 	"GLUTEN", # side launchers
 	"DEATHDOUSPART", # splitter
 	"FULLLOAF", # four_slot + rapid_fire
+	"THREEOFME", # triple
 	"CROSSOVER", # kill all ghosts
 	"GRAVEYARD", # spawn lots of ghosts
 	"GODOFBREAD", # all powerups
@@ -98,9 +126,9 @@ const ghost_database = [
 	{ # small drop ghost
 		"sprite": 0,
 		"tint": Color.blueviolet,
-		"weight": 10,
+		"weight": 50,
 		"after": 15,
-		"cd": 10,
+		"cd": 15,
 		"mult": 1,
 		"hp": 15,
 		"speed": 120,
@@ -136,12 +164,12 @@ const ghost_database = [
 	{ # boss ghost
 		"sprite": 2,
 		"weight": 10,
-		"after": 20,
+		"after": 25,
 		"cd": 20,
 		"mult": 3,
 		"hp": 60,
 		"speed": 75,
-		"drop": 1.05,
+		"drop": 0.75,
 		"hurt_sounds": ["hurt5"],
 		"death_sounds": ["die3"]
 	},
@@ -149,12 +177,12 @@ const ghost_database = [
 		"sprite": 2,
 		"tint": Color.dodgerblue,
 		"weight": 1,
-		"after": 30,
+		"after": 40,
 		"cd": 30,
 		"mult": 6,
 		"hp": 120,
 		"speed": 50,
-		"drop": 1.4,
+		"drop": 1.1,
 		"hurt_sounds": ["hurt5"],
 		"death_sounds": ["die3"]
 	},
@@ -166,7 +194,7 @@ const ghost_database = [
 		"cd": 75,
 		"mult": 20,
 		"hp": 200,
-		"speed": 30,
+		"speed": 25,
 		"drop": 2,
 		"hurt_sounds": ["hurt5"],
 		"death_sounds": ["die3"]

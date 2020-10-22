@@ -4,6 +4,7 @@ const GHOST_SPEED = 75
 
 var ghost_velocity = Vector2.ZERO
 var ghost_offset = Vector2(70, 0)
+var high_scores_loaded = false
 
 onready var ghost = $Node2D/Ghost
 
@@ -42,5 +43,21 @@ func _on_Credits_pressed():
 
 func _on_CreditsClose_pressed():
 	$Credits.hide()
+	
+func _on_Button_pressed():
+	$HighScores.hide()
 
-
+func _on_HighScores_pressed():
+	$HighScores.show()
+	if high_scores_loaded: return
+	var list = $HighScores/Panel/VBoxContainer/MarginContainer/HighScoreList
+	list.text = "Loading..."
+	G.get_high_scores()
+	yield(G.get_high_scores(), "api_call_complete")
+	list.text = ""
+	if "scores" in G.api_result:
+		for score in G.api_result.scores:
+			list.text += str(score.place) + ". " + score.player_name + " - " + str(score.score) + "\n"
+		high_scores_loaded = true
+	else:
+		$HighScores.hide()

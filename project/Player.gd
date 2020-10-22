@@ -2,7 +2,6 @@ extends Node2D
 
 signal fired
 
-const EDGE = 100
 const SPEED = 250
 const ROTATION_SPEED = 0.2
 const MIN_ROT = -PI * .90
@@ -11,6 +10,7 @@ const COOLDOWN_DURATION = 0.75
 
 var aim_mode = "M"
 var joy_device = 0
+var edge = 80
 
 var cooldown_modifier = 1.0
 var speed_modifier = 1.0
@@ -47,7 +47,7 @@ func _process(delta):
 	speed = dir * SPEED * speed_modifier
 	if dir != 0:
 		position.x += speed * delta
-		position.x = clamp(position.x, EDGE, 640 - EDGE)
+		position.x = clamp(position.x, edge, 640 - edge)
 	
 	if aim_mode == "M" and get_global_mouse_position().y < position.y:
 		toaster.look_at(get_global_mouse_position())
@@ -83,10 +83,16 @@ func _unhandled_input(event):
 		joy_device = event.device
 
 func fire():
-	if powerups.four_slot > 0:
+	if powerups.four_slot > 0 and powerups.two_slot > 0:
+		fire_projectile(toaster, -0.3)
+		fire_projectile(toaster, -0.15)
+		fire_projectile(toaster, 0)
+		fire_projectile(toaster, 0.15)
+		fire_projectile(toaster, 0.3)
+	elif powerups.four_slot > 0:
+		fire_projectile(toaster, -0.3)
 		fire_projectile(toaster, -0.1)
 		fire_projectile(toaster, 0.1)
-		fire_projectile(toaster, -0.3)
 		fire_projectile(toaster, 0.3)
 	elif powerups.two_slot > 0:
 		fire_projectile(toaster, -0.15)
@@ -118,7 +124,7 @@ func fire_projectile(t, angle_offset = 0):
 func collect(powerup):
 	powerups[powerup.id] = min(powerups[powerup.id] + powerup.duration, powerup.duration * 1.5)
 	if has_method("powerup_" + powerup.id):
-		call("powerup_" + powerup.id)
+		call_deferred("powerup_" + powerup.id)
 	call_deferred("collect_message", powerup)
 
 func collect_message(powerup):
@@ -130,8 +136,12 @@ func collect_message(powerup):
 func powerup_triple(enable = true):
 	if enable:
 		$TripleAnimationPlayer.play("triple_show")
+		$Collector/CollisionShape2D.shape.extents.x = 120
+		edge = 120
 	else:
 		$TripleAnimationPlayer.play("triple_hide")
+		$Collector/CollisionShape2D.shape.extents.x = 80
+		edge = 80
 
 func powerup_rapid_fire(enable = true):
 	if enable:

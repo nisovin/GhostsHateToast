@@ -276,7 +276,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="Type1" type="CollisionPolygon2D" parent="Entity"]
-visible = false
+position = Vector2( -1.4158, -7.07906 )
 polygon = PoolVector2Array( 5.81111, -32.5861, -14.1081, -24.2617, -18.8649, -6.4236, -8.75667, 12.6037, 18.0005, 31.0364, 11.1626, 8.4415, 14.7302, -14.1534 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Entity/Type1"]
@@ -299,6 +299,8 @@ position = Vector2( -5.18921, -29.2841 )
 shape = SubResource( 9 )
 
 [node name="Type2" type="CollisionPolygon2D" parent="Entity"]
+visible = false
+position = Vector2( 0, -1.88774 )
 polygon = PoolVector2Array( 1.05429, -46.262, 11.1626, -41.5052, 18.8924, -24.8563, 23.0546, 37.2798, -23.9191, 38.7663, -22.4325, 0.711655, -13.8108, -36.7484 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Entity/Type2"]
@@ -322,6 +324,7 @@ shape = SubResource( 9 )
 
 [node name="Type3" type="CollisionPolygon2D" parent="Entity"]
 visible = false
+position = Vector2( 0.471939, -0.943878 )
 polygon = PoolVector2Array( 20.0816, -69.1543, 39.1089, -26.0455, 41.4873, 23.6039, 36.4332, 36.0906, -29.2705, 25.3877, -42.9464, 3.38736, -38.7841, -36.1538, -13.5135, -58.7487 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Entity/Type3"]

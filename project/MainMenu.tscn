@@ -47,7 +47,7 @@ extra_spacing_char = 3
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=9]
-size = 32
+size = 24
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
@@ -99,41 +99,50 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
-margin_left = 234.0
-margin_top = 98.0
-margin_right = 406.0
-margin_bottom = 262.0
+margin_left = 248.0
+margin_top = 97.0
+margin_right = 392.0
+margin_bottom = 263.0
 
 [node name="Play" type="Button" parent="Menu/VBoxContainer"]
-margin_right = 172.0
-margin_bottom = 38.0
+margin_right = 144.0
+margin_bottom = 30.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 9 )
 text = "Play"
 flat = true
 
+[node name="HighScores" type="Button" parent="Menu/VBoxContainer"]
+margin_top = 34.0
+margin_right = 144.0
+margin_bottom = 64.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 9 )
+text = "High Scores"
+flat = true
+
 [node name="FullScreen" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 42.0
-margin_right = 172.0
-margin_bottom = 80.0
+margin_top = 68.0
+margin_right = 144.0
+margin_bottom = 98.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 9 )
 text = "Fullscreen"
 flat = true
 
 [node name="Credits" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 84.0
-margin_right = 172.0
-margin_bottom = 122.0
+margin_top = 102.0
+margin_right = 144.0
+margin_bottom = 132.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 9 )
 text = "Credits"
 flat = true
 
 [node name="Quit" type="Button" parent="Menu/VBoxContainer"]
-margin_top = 126.0
-margin_right = 172.0
-margin_bottom = 164.0
+margin_top = 136.0
+margin_right = 144.0
+margin_bottom = 166.0
 mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 9 )
 text = "Quit"
@@ -187,6 +196,35 @@ bbcode_enabled = true
 bbcode_text = "[center]
 
 =====================
+DEVELOPMENT
+=====================
+
+Programming: Nisovin
+Art: Aeldae
+Sound Effects: TonyArakawa and Nisovin
+
+
+=====================
+MUSIC
+=====================
+
+Mischief Maker by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4059-mischief-maker
+License: http://creativecommons.org/licenses/by/4.0/
+
+Goulish Fun (Looping) by Eric Matyas
+www.soundimage.org
+
+
+=====================
+MISC
+=====================
+
+Font: November by Tepid Monkey Fonts
+https://www.1001fonts.com/november-font.html
+
+
+=====================
 GODOT WILD JAM #26
 =====================
 
@@ -194,6 +232,36 @@ Themes:
 
 [img=150]res://img/bread.png[/img] [img=150]res://img/spooky.png[/img] [img=150]res://img/prehistoric.png[/img]
 
+
+=====================
+ENGINE
+=====================
+
+    This game uses Godot Engine, available under the following license:
+
+    Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2020 Godot Engine contributors.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+	Portions of this software are copyright © 2020 The FreeType Project (www.freetype.org). All rights reserved.
+
+
+
+    MBedTLS is Copyright (C) 2013-2019 ARM
+
+    Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+
+[/center]"
+text = "
 
 =====================
 DEVELOPMENT
@@ -217,24 +285,12 @@ www.soundimage.org
 
 
 =====================
-ENGINE
+MISC
 =====================
 
-    This game uses Godot Engine, available under the following license:
+Font: November by Tepid Monkey Fonts
+https://www.1001fonts.com/november-font.html
 
-    Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2020 Godot Engine contributors.
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-	Portions of this software are copyright © 2020 The FreeType Project (www.freetype.org). All rights reserved.
-
-[/center]"
-text = "
 
 =====================
 GODOT WILD JAM #26
@@ -246,27 +302,6 @@ Themes:
 
 
 =====================
-DEVELOPMENT
-=====================
-
-Programming: Nisovin
-Art: Aeldae
-Sound Effects: TonyArakawa and Nisovin
-
-
-=====================
-MUSIC
-=====================
-
-Mischief Maker by Kevin MacLeod
-Link: https://incompetech.filmmusic.io/song/4059-mischief-maker
-License: http://creativecommons.org/licenses/by/4.0/
-
-Goulish Fun (Looping) by Eric Matyas
-www.soundimage.org
-
-
-=====================
 ENGINE
 =====================
 
@@ -282,6 +317,16 @@ ENGINE
 
 
 	Portions of this software are copyright © 2020 The FreeType Project (www.freetype.org). All rights reserved.
+
+
+
+    MBedTLS is Copyright (C) 2013-2019 ARM
+
+    Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
 
 "
 __meta__ = {
@@ -300,6 +345,66 @@ margin_right = 303.0
 margin_bottom = 20.0
 text = "Close"
 
+[node name="HighScores" type="MarginContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="HighScores"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 600.0
+margin_bottom = 320.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HighScores/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HighScores/Panel/VBoxContainer"]
+margin_right = 560.0
+margin_bottom = 14.0
+text = "High Scores"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HighScores/Panel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 560.0
+margin_bottom = 256.0
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HighScoreList" type="Label" parent="HighScores/Panel/VBoxContainer/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 550.0
+margin_bottom = 228.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HighScores/Panel/VBoxContainer"]
+margin_top = 260.0
+margin_right = 560.0
+margin_bottom = 280.0
+alignment = 1
+
+[node name="Button" type="Button" parent="HighScores/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 256.0
+margin_right = 303.0
+margin_bottom = 20.0
+text = "Close"
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -25.0
@@ -312,8 +417,10 @@ volume_db = -15.0
 [node name="SoundTimer" type="Timer" parent="."]
 one_shot = true
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/HighScores" to="." method="_on_HighScores_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/FullScreen" to="." method="_on_FullScreen_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="pressed" from="Credits/Panel/VBoxContainer/HBoxContainer/CreditsClose" to="." method="_on_CreditsClose_pressed"]
+[connection signal="pressed" from="HighScores/Panel/VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="timeout" from="SoundTimer" to="." method="_on_SoundTimer_timeout"]

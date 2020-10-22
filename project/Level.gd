@@ -12,6 +12,7 @@ var escaping = false
 var escaped = 0
 var cheats_used = false
 var gameover = false
+var final_score = 0
 
 var first_drop = true
 
@@ -28,6 +29,15 @@ func _ready():
 		else:
 			g.next = 0
 
+func _process(delta):
+	if not gameover and player != null:
+		for p in player.powerups:
+			var v = player.powerups[p]
+			var n = get_node("CanvasLayer/Timers/" + p)
+			var n2 = n.get_node("Value")
+			n.visible = v > 0
+			n2.text = str(int(ceil(v)))
+
 func show_help(text, duration = 5):
 	var label = $CanvasLayer/TutorialLabel
 	var tween = $CanvasLayer/TutorialLabel/Tween
@@ -42,6 +52,9 @@ func _unhandled_input(event):
 		get_tree().paused = true
 
 func _unhandled_key_input(event):
+	if event.pressed and event.scancode == KEY_F2:
+		score = 1500
+		end_game()
 	if event.pressed and event.scancode >= KEY_A and event.scancode <= KEY_Z and not gameover:
 		var key = OS.get_scancode_string(event.scancode)
 		cheatcode += key
@@ -93,10 +106,10 @@ func _on_ghost_die(ghost, bread):
 		if randf() < chance:
 			drops += 1
 		if drops == 1:
-			spawn_powerup(ghost.position)
+			spawn_powerup(ghost.position + Vector2(0, -30))
 		elif drops == 2:
-			spawn_powerup(ghost.position - Vector2(10, 0))
-			spawn_powerup(ghost.position + Vector2(10, 0))
+			spawn_powerup(ghost.position + Vector2(-10, -30))
+			spawn_powerup(ghost.position + Vector2(10, -30))
 
 func spawn_powerup(position):
 	var powerup = G.Powerup.instance()
@@ -150,8 +163,9 @@ func end_game():
 	gameover = true
 	interval = 0.5
 	$Player.queue_free()
-	var s = round(score)
-	$CanvasLayer/GameOver/Center/VBoxContainer/FinalScore.text = "Score: " + str(s)
+	player = null
+	final_score = round(score)
+	$CanvasLayer/GameOver/Center/VBoxContainer/FinalScore.text = "Score: " + str(final_score)
 	if score > 500:
 		if G.save_data.unlocked_cheatcodes < G.cheatcode_database.size():
 			$CanvasLayer/GameOver/Cheatcode.text = G.cheatcode_database[G.save_data.unlocked_cheatcodes]
@@ -159,9 +173,13 @@ func end_game():
 		else:
 			$CanvasLayer/GameOver/Cheatcode.text = G.cheatcode_database[randi() % G.cheatcode_database.size()]
 	$CanvasLayer/GameOver.show()
-	if s > G.save_data.high_score and not cheats_used:
-		G.save_data.high_score = s
-	G.save_game()
+	if final_score > G.save_data.high_score and not cheats_used:
+		G.save_data.high_score = final_score
+		G.save_game()
+	if not cheats_used:
+		$CanvasLayer/GameOver/Center/VBoxContainer/SubmitRow.show()
+	else:
+		$CanvasLayer/GameOver/Center/VBoxContainer/SubmitRow.hide()
 
 func check_cheat_code():
 	for c in G.cheatcode_database:
@@ -178,6 +196,9 @@ func cheat_sandwich():
 	
 func cheat_creamcheese():
 	activate_powerup_by_name("dense")
+	
+func cheat_threeofme():
+	activate_powerup_by_name("triple")
 
 func cheat_gluten():
 	fire_side_launchers()
@@ -221,3 +242,18 @@ func _on_Resume_pressed():
 func _on_Quit_pressed():
 	get_tree().quit()
 
+func _on_SubmitButton_pressed():
+	var row = $CanvasLayer/GameOver/Center/VBoxContainer/SubmitRow
+	var line = $CanvasLayer/GameOver/Center/VBoxContainer/SubmitRow/LineEdit
+	var btn = $CanvasLayer/GameOver/Center/VBoxContainer/SubmitRow/SubmitButton
+	var menu = $CanvasLayer/GameOver/Center/VBoxContainer/Menu
+	var score_name = line.text
+	if score_name != '' and final_score > 0 and not cheats_used:
+		line.editable = false
+		btn.disabled = true
+		menu.disabled = true
+		G.publish_high_score(score_name, final_score)
+		yield(G, "api_call_complete")
+		menu.disabled = false
+		line.text = "Saved!"
+		

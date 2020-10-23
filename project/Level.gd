@@ -52,8 +52,8 @@ func _unhandled_input(event):
 		get_tree().paused = true
 
 func _unhandled_key_input(event):
-	if event.pressed and event.scancode == KEY_F2:
-		score = 1500
+	if event.pressed and event.scancode == KEY_F2 and Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_CONTROL):
+		score = 555
 		end_game()
 	if event.pressed and event.scancode >= KEY_A and event.scancode <= KEY_Z and not gameover:
 		var key = OS.get_scancode_string(event.scancode)
@@ -75,7 +75,7 @@ func _on_SpawnTimer_timeout():
 	ghost.connect("died", self, "_on_ghost_die")
 	$SpawnTimer.start(rand_range(interval * 0.7, interval * 1.2))
 	if ghost_count == 1 and G.save_data.high_score == 0:
-		show_help("Left click to shoot toast")
+		show_help("Left click to shoot toast (hold to repeat)")
 		yield(get_tree().create_timer(10), "timeout")
 		show_help("Use A and D to move")
 

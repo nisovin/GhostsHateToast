@@ -41,7 +41,8 @@ func save_game():
 	file.close()
 
 func publish_high_score(player, score):
-	http.request("https://nisovin.com/gamejams/save_score.php?key=" + api_key + "&player=" + player + "&score=" + str(score), [], true, HTTPClient.METHOD_GET)
+	var hashed = APIKey.get_hash(player, score)
+	http.request("https://nisovin.com/gamejams/save_score.php?key=" + api_key + "&player=" + player + "&score=" + str(score) + "&hash=" + hashed, [], true, HTTPClient.METHOD_GET)
 	return self
 	
 func get_high_scores():
